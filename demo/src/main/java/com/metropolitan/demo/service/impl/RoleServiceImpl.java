@@ -23,7 +23,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role findById(Integer roleId) {
 		return roleRepository.findById(roleId)
-				.orElseThrow(() -> new NoSuchElementException("RoleService.notFound"));
+				.orElseThrow(() -> new NoSuchElementException("Nije pronadjena rola"));
 	}
 
 	@Override
