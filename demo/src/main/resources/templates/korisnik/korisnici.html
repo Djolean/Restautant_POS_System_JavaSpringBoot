@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Prikaz svih korisnika</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:include="navbar/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h2 style="text-align: center">Prikaz svih korisnika</h2>
+
+    <div class="text-right mb-3">
+        <a th:href="@{/korisniks/create}" class="btn btn-success">Dodaj novog korisnika</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                <div class="d-flex align-items-center">
+                    Ime
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center">
+                    Prezime
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center">
+                    Korisničko ime
+                </div>
+            </th>
+
+            <th>
+                <div class="d-flex align-items-center">
+                    Lozinka
+                </div>
+            </th>
+
+            <th>
+                <div class="d-flex align-items-center">
+                    Plata
+                </div>
+            </th>
+
+            <th>
+                <div class="d-flex align-items-center">
+                    Rola
+                </div>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="korisnik : ${korisniks}">
+            <td th:text="${korisnik.ime}"></td>
+            <td th:text="${korisnik.prezime}"></td>
+            <td th:text="${korisnik.korisnickoIme}"></td>
+            <td th:text="${#strings.repeat('•', korisnik.lozinka.length())}"> th:text="${korisnik.lozinka}"></td>
+            <td th:text="${korisnik.plata}"></td>
+            <td th:text="${korisnik.roleId}"></td>
+            <td>
+                <a th:href="@{/korisniks/edit/{id}(id=${korisnik.id})}" class="btn btn-primary btn-sm">Izmeni</a>
+                <a th:href="@{/korisniks/delete/{id}(id=${korisnik.id})}" class="btn btn-danger btn-sm">Obriši</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

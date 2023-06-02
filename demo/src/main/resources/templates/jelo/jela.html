@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Prikaz svih jela</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:include="navbar/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h2 style="text-align: center">Prikaz svih jela</h2>
+
+    <div class="text-right mb-3">
+        <a th:href="@{/jelos/create}" class="btn btn-success">Dodaj novo jelo</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                <div class="d-flex align-items-center">
+                    Naziv
+                    <div class="btn-group-vertical ml-2">
+                        <form th:action="@{/jelos/sortJeloByNameAsc}" method="get">
+                        <button type="submit" class="btn btn-sm btn-secondary rounded-circle" style="scale:0.5">
+                            &#9650;
+                        </button>
+                        </form>
+                        <form th:action="@{/jelos/sortJeloByNameDesc}" method="get">
+                        <button type="submit" class="btn btn-sm btn-secondary rounded-circle" style="scale: 0.5">
+                            &#9660;
+                        </button>
+                        </form>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center">
+                    Cena
+                    <div class="btn-group-vertical ml-2">
+                        <form th:action="@{/jelos/sortJeloByPriceAsc}" method="get">
+                            <button type="submit" class="btn btn-sm btn-secondary rounded-circle" style="scale: 0.5">
+                                &#9650;
+                            </button>
+                        </form>
+                        <form th:action="@{/jelos/sortJeloByPriceDesc}" method="get">
+                            <button type="submit" class="btn btn-sm btn-secondary rounded-circle" style="scale: 0.5">
+                                &#9660;
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center">
+                    Opis
+                </div>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="jelo : ${jelos}">
+            <td th:text="${jelo.naziv}"></td>
+            <td th:text="${jelo.cena}"></td>
+            <td th:text="${jelo.opis}"></td>
+            <td>
+                <a th:href="@{/jelos/edit/{jeloId}(jeloId=${jelo.id})}" class="btn btn-primary btn-sm">Izmeni</a>
+                <a th:href="@{/jelos/delete/{jeloId}(jeloId=${jelo.id})}" class="btn btn-danger btn-sm">Obriši</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

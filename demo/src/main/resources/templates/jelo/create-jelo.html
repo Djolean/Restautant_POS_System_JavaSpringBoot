@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kreiranje jela</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 style="text-align: center">Kreiranje jela</h2>
+    <form action="#" th:action="@{/jelos/createJelo}" th:object="${jelo}" method="post">
+        <div class="form-group">
+            <label for="naziv">Naziv:</label>
+            <input type="text" class="form-control" id="naziv" name="naziv" th:field="*{naziv}">
+        </div>
+        <div class="form-group">
+            <label for="cena">Cena:</label>
+            <input type="number" class="form-control" id="cena" name="cena" th:field="*{cena}">
+        </div>
+        <div class="form-group">
+            <label for="opis">Opis:</label>
+            <textarea class="form-control" id="opis" name="opis" th:field="*{opis}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Sačuvaj jelo</button>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

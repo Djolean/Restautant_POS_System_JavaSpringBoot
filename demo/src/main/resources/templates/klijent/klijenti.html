@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<head>
+  <title>Klijenti</title>
+  <style>
+    .table {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align:center;
+      display: inline-block;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+      cursor: pointer;
+      font-size: 24px;
+      color: #333333;
+      transition: transform 0.3s ease-in-out;
+      margin-top: 12%;
+    }
+
+    .table:hover {
+      transform: scale(1.1);
+    }
+
+  </style>
+</head>
+<body>
+<div class="table-container" th:include="navbar/navbar :: navbar"></div>
+<div class="table" th:each="tableNumber : ${#numbers.sequence(1, 6)}" th:text="'Table ' + ${tableNumber}" th:onclick="'buttonClicked(' + ${tableNumber} + ')'" ></div>
+
+</body>
+</html>

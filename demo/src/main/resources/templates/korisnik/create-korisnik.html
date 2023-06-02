@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kreiranje korisnika</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 style="text-align: center">Kreiraj korisnika</h2>
+    <form action="#" th:action="@{/korisniks/createKorisnik}" th:object="${korisnik}" method="post">
+        <div class="form-group">
+            <label for="ime">Ime:</label>
+            <input type="text" class="form-control" id="ime" name="ime" th:field="*{ime}">
+        </div>
+
+        <div class="form-group">
+            <label for="prezime">Prezime:</label>
+            <input type="text" class="form-control" id="prezime" name="prezime" th:field="*{prezime}">
+        </div>
+
+        <div class="form-group">
+            <label for="korisnicko_ime">Korisničko ime:</label>
+            <input type="text" class="form-control" id="korisnicko_ime" name="korisnicko_ime" th:field="*{korisnickoIme}">
+        </div>
+
+        <div class="form-group">
+            <label for="lozinka">Lozinka:</label>
+            <input type="password" class="form-control" id="lozinka" name="lozinka" th:field="*{lozinka}">
+        </div>
+
+        <div class="form-group">
+            <label for="plata">Plata:</label>
+            <input type="number" class="form-control" id="plata" name="plata" th:field="*{plata}">
+        </div>
+
+        <div class="form-group">
+            <label for="roleId">Role:</label>
+            <select class="form-control" id="roleId" name="roleId">
+                <option value="">Choose a role</option>
+                <option value="1" th:selected="${korisnik.roleId == 'Korisnik'}">Korisnik</option>
+                <option value="2" th:selected="${korisnik.roleId == 'Admin'}">Admin</option>
+            </select>
+        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="role_id">Role ID:</label>-->
+<!--            <input type="text" class="form-control" id="role_id" name="role_id" th:field="*{roleId}">-->
+<!--        </div>-->
+        <button type="submit" class="btn btn-primary">Sačuvaj Korisnika</button>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

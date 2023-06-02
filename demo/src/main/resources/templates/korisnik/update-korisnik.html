@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Izmena korisnika</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 style="text-align: center">Izmena korisnika</h2>
+    <form action="#" th:action="@{/korisniks/update/{id}(id=${korisnik.id})}" th:object="${korisnik}" method="post">
+        <input type="hidden" name="jeloId" th:value="${korisnik.id}">
+        <div class="form-group">
+            <label for="ime">Ime:</label>
+            <input type="text" class="form-control" id="ime" name="ime" th:value="${korisnik.ime}">
+        </div>
+
+        <div class="form-group">
+            <label for="prezime">Prezime:</label>
+            <input type="text" class="form-control" id="prezime" name="prezime" th:value="${korisnik.prezime}">
+        </div>
+
+        <div class="form-group">
+            <label for="korisnickoIme">Korisničko ime:</label>
+            <input type="text" class="form-control" id="korisnickoIme" name="korisnickoIme"
+                   th:value="${korisnik.korisnickoIme}">
+        </div>
+
+        <div class="form-group">
+            <label for="lozinka">Lozinka:</label>
+            <input type="password" class="form-control" id="lozinka" name="lozinka"  th:value="${korisnik.lozinka}">
+        </div>
+
+        <div class="form-group">
+            <label for="plata">Plata:</label>
+            <input type="text" class="form-control" id="plata" name="plata" th:value="${korisnik.plata}">
+        </div>
+        <div class="form-group">
+            <label for="roleId">Role ID:</label>
+            <select class="form-control" id="roleId" name="roleId">
+                <option value="">Choose a role</option>
+                <option value="1" th:selected="${korisnik.roleId == '1'}">Korisnik</option>
+                <option value="2" th:selected="${korisnik.roleId == '2'}">Admin</option>
+            </select>
+        </div>
+
+        <!--        <div class="form-group">-->
+<!--            <label for="roleId">Role:</label>-->
+<!--            <input type="text" class="form-control" id="roleId" name="roleId" th:value="${korisnik.roleId}">-->
+<!--        </div>-->
+
+        <button type="submit" class="btn btn-primary">Sačuvaj izmene</button>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
