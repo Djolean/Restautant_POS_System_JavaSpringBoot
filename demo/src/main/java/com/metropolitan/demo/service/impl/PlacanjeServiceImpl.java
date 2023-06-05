@@ -3,8 +3,13 @@ package com.metropolitan.demo.service.impl;
 
 import com.metropolitan.demo.entity.Narudzbina;
 import com.metropolitan.demo.entity.Placanje;
+import com.metropolitan.demo.entity.Sto;
+import com.metropolitan.demo.repository.NarudzbinaRepository;
 import com.metropolitan.demo.repository.PlacanjeRepository;
+import com.metropolitan.demo.repository.StoRepository;
+import com.metropolitan.demo.service.NarudzbinaService;
 import com.metropolitan.demo.service.PlacanjeService;
+import com.metropolitan.demo.service.StoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +23,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PlacanjeServiceImpl implements PlacanjeService {
 	private final PlacanjeRepository placanjeRepository;
+
+	private final NarudzbinaService narudzbinaService;
+
+	private final StoService stoService;
+	private final StoRepository stoRepository;
 
 	@Override
 	public List<Placanje> findAll() {
@@ -46,12 +56,22 @@ public class PlacanjeServiceImpl implements PlacanjeService {
 	}
 
 	@Override
-	public void naplati(Narudzbina narudzbina) {
+	public void naplati(Integer narudzbinaId) {
+
+		Narudzbina narudzbina = narudzbinaService.findById(narudzbinaId);
+
+
 		Placanje placanje = new Placanje();
 		UUID barcode = UUID.randomUUID();
 		placanje.setBarCode(barcode);
 		placanje.setDatumPlacanja(LocalDateTime.now());
 		placanje.setNarudzbinaId(narudzbina);
+
+		Sto sto = stoRepository.findByNarudzbina_Id(narudzbinaId);
+		sto.setNarudzbina(null);
+		sto.setZauzeto(false);
+		stoService.update(sto);
+
 		save(placanje);
 	}
 }

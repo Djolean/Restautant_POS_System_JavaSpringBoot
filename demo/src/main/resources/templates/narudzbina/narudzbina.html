@@ -34,6 +34,7 @@
             </tbody>
         </table>
         <form th:action="@{/placanjes/naplati}" method="post">
+            <input hidden="hidden" id="narudzbinaPlacanjeId" name="narudzbinaPlacanjeId" th:value="${narudzbina.id}">
             <button class="btn btn-success" type="submit">Naplati</button>
         </form>
     </div>

@@ -17,7 +17,5 @@ public interface PlacanjeService {
 
 	void deleteById(Integer placanjeId);
 
-	void naplati(Narudzbina narudzbina);
-
-
+	void naplati(Integer narudzbinaId);
 }

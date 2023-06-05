@@ -20,14 +20,6 @@ import java.util.List;
 public class StoController {
 
     private final StoService stoService;
-    private final StoRepository stoRepository;
-
-//    @GetMapping("/sto/{id}")
-//    public String openStoPage(@PathVariable("id") Integer id, Model model) {
-//        Sto sto = stoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ne postoji id"));
-//        model.addAttribute("sto", sto);
-//        return "narudzbina/narudzbina";
-//    }
 
     @GetMapping
     public String getAllStos(Model model) {

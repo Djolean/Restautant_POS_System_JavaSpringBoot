@@ -50,20 +50,9 @@ public class PlacanjeController {
     }
 
     @PostMapping("/naplati")
-    public String naplati(Narudzbina narudzbina, Model model, BindingResult result) {
-        if (result.hasErrors()) {
-            model.addAttribute("message", "Program je puko!");
-            return "naplati";
-        } else {
-            placanjeService.naplati(narudzbina);
-            model.addAttribute("message", "Uspesno ste izvrsili naplatu!");
-            return "naplati";
-        }
-
+    public String naplati(@RequestParam("narudzbinaPlacanjeId") Integer narudzbinaId) {
+        placanjeService.naplati(narudzbinaId);
+        return "redirect:/stos";
     }
 }
-
-
-
-
 

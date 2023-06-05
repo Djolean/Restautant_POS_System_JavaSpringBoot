@@ -19,6 +19,7 @@ import java.util.UUID;
 @Table(name = "placanje")
 public class Placanje implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "placanje_id")
 	private Integer id;
 	@ManyToOne (fetch = FetchType.EAGER)
