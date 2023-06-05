@@ -18,7 +18,9 @@ public interface NarudzbinaService {
 
 	void deleteById(Integer narudzbinaId);
 
-	void addToNarudzbina(Integer narudzbinaId, Integer jeloId);
+	//void addToNarudzbina(Integer narudzbinaId, Integer jeloId);
 
 	void deleteFromNarudzbina(Integer narudzbinaId, Integer jeloId);
+
+	double ukupnaCenaNarudzbine(List<Jelo> jela);
 }

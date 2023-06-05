@@ -46,14 +46,14 @@ public class NarudzbinaServiceImpl implements NarudzbinaService {
 		narudzbinaRepository.deleteById(narudzbinaId);
 	}
 
-	@Override
-	public void addToNarudzbina(Integer narudzbinaId, Integer jeloId) {
-		Narudzbina narudzbina = findById(narudzbinaId);
-		Jelo jelo = jeloService.findById(jeloId);
-		narudzbina.setUkupnaCena(narudzbina.getUkupnaCena() + jelo.getCena());
-		narudzbina.getJelos().add(jelo);
-		narudzbinaRepository.save(narudzbina);
-	}
+//	@Override
+//	public void addToNarudzbina(Integer narudzbinaId, Integer jeloId) {
+//		Narudzbina narudzbina = findById(narudzbinaId);
+//		Jelo jelo = jeloService.findById(jeloId);
+//		narudzbina.setUkupnaCena(narudzbina.getUkupnaCena() + jelo.getCena());
+//		narudzbina.getJelos().add(jelo);
+//		narudzbinaRepository.save(narudzbina);
+//	}
 
 	@Override
 	public void deleteFromNarudzbina(Integer narudzbinaId, Integer jeloId) {
@@ -62,6 +62,15 @@ public class NarudzbinaServiceImpl implements NarudzbinaService {
 		narudzbina.setUkupnaCena(narudzbina.getUkupnaCena() - jelo.getCena());
 		narudzbina.getJelos().remove(jelo);
 		save(narudzbina);
+	}
+
+	@Override
+	public double ukupnaCenaNarudzbine(List<Jelo> jela) {
+		double ukupnaCena = 0.0;
+		for (Jelo j : jela){
+			ukupnaCena += j.getCena();
+		}
+		return ukupnaCena;
 	}
 
 

@@ -2,35 +2,86 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <head>
-  <title>Klijenti</title>
-  <style>
-    .table {
-      width: 200px;
-      height: 200px;
-      border-radius: 10px;
-      background-color: #ffffff;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align:center;
-      display: inline-block;
-      justify-content: center;
-      align-items: center;
-      margin: 15px;
-      cursor: pointer;
-      font-size: 24px;
-      color: #333333;
-      transition: transform 0.3s ease-in-out;
-      margin-top: 12%;
-    }
 
-    .table:hover {
-      transform: scale(1.1);
-    }
+    <title>Klijenti</title>
+    <style>
+        .square-button {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 120px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-  </style>
+        .square-button:hover {
+            background-color: #0056b3;
+        }
+
+        .divCenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
 </head>
+
 <body>
-<div class="table-container" th:include="navbar/navbar :: navbar"></div>
-<div class="table" th:each="tableNumber : ${#numbers.sequence(1, 6)}" th:text="'Table ' + ${tableNumber}" th:onclick="'buttonClicked(' + ${tableNumber} + ')'" ></div>
+<div th:include="navbar/navbar :: navbar"></div>
+
+<div class="divCenter">
+    <div class="row">
+        <div class="col-md-2">
+            <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="get">
+                <input type="hidden" name="id" value="1">
+                <button type="submit" class="square-button">1</button>
+            </form>
+        </div>
+
+        <div class="col-md-2">
+            <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="get">
+                <input type="hidden" name="id" value="2">
+                <button type="submit" class="square-button">2</button>
+            </form>
+        </div>
+
+        <div class="col-md-2">
+            <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="get">
+                <input type="hidden" name="id" value="3">
+                <button type="submit" class="square-button">3</button>
+            </form>
+        </div>
+
+        <div class="col-md-2">
+            <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="get">
+                <input type="hidden" name="id" value="4">
+                <button type="submit" class="square-button">4</button>
+            </form>
+        </div>
+
+        <div class="col-md-2">
+            <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="get">
+                <input type="hidden" name="id" value="5">
+                <button type="submit" class="square-button">5</button>
+            </form>
+        </div>
+
+        <div class="col-md-2">
+            <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="get">
+                <input type="hidden" name="id" value="6">
+                <button type="submit" class="square-button">6</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kreiranje Narudzbine</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6">
+        <!-- Left side: Narudzbina table -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Cena</th>
+                <th>Ukupna cena</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Add your table rows here with data from the model -->
+            <tr th:each="jelo : ${narudzbina.getJelos()}">
+                <td th:text="${jelo.naziv}"></td>
+                <td th:text="${jelo.cena}"></td>
+                <td th:text="${null}"></td>
+                <td>
+                    <form th:action="@{/delete}" method="post">
+                        <input type="hidden" name="id" th:value="${narudzbina.id}">
+                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/naplati}" method="post">
+            <button class="btn btn-success" type="submit">Naplati</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+
+        <!-- Right side: Meni table -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Cena</th>
+                <th>Opis</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="jelo : ${jelos}">
+                <td th:text="${jelo.naziv}"></td>
+                <td th:text="${jelo.cena}"></td>
+                <td th:text="${jelo.opis}"></td>
+                <td>
+                        <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="post">
+<!--                        <input type="hidden" name="id" th:value="${sto.id}">-->
+                        <input type="hidden" name="jeloId" th:value="${jelo.id}">
+                        <button class="btn btn-primary btn-sm" type="submit">Dodaj</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

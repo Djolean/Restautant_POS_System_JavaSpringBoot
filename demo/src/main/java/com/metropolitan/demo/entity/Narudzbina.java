@@ -20,6 +20,7 @@ import javax.persistence.CascadeType;
 @Table(name = "narudzbina")
 public class Narudzbina implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "narudzbina_id")
 	private Integer id;
 	@ManyToOne (cascade = CascadeType.REMOVE)
