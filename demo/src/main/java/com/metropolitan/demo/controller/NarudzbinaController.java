@@ -60,21 +60,23 @@ public class NarudzbinaController {
     }
 
 
-	@PostMapping("/sto/novaNarudzbina/{jeloId}")
-    public String addToNarudzbina(@RequestParam Integer jeloId, @Valid Narudzbina narudzbina ) {
-        Jelo jelo = jeloService.findById(jeloId);
-        List<Jelo> jela = new ArrayList<>();
-        jela.add(jelo);
-        narudzbina.setJelos(jela);
-        narudzbina.setDatum(LocalDate.from(LocalDateTime.now()));
-        narudzbina.setKorisnikId(korisnikService.getLoggedInUser());
-        narudzbina.setUkupnaCena(narudzbinaService.ukupnaCenaNarudzbine(jela));
+	@PostMapping("/sto/novaNarudzbina")
+    public String addToNarudzbina(@RequestParam Integer jeloId, @Valid Narudzbina narudzbina, Model model) {
+        narudzbinaService.addToNarudzbina(narudzbina, jeloId);
+        List<Jelo> listaJela = narudzbinaService.findById(narudzbina.getId()).getJelos();
 
-        narudzbinaService.save(narudzbina);
+
+        model.addAttribute("listaJela", listaJela);
+        model.addAttribute("narudzbina", narudzbina);
 
         return "narudzbina/narudzbina";
     }
 
+//    @GetMapping("/sto/novaNarudzbina/{narudzbinaId}")
+//    public String openNarudzbinaPage(@PathVariable Integer narudzbinaId, Model model){
+//        model.addAttribute("narudzbina", narudzbinaService.findById(narudzbinaId));
+//        return "naruzbina/nova-narudzbina";
+//    }
 
 
     @DeleteMapping("/{narudzbinaId}/{jeloId}")
@@ -82,21 +84,13 @@ public class NarudzbinaController {
         narudzbinaService.deleteFromNarudzbina(narudzbinaId, jeloId);
         return "redirect:/narudzbina/narudzbina";
     }
-//
-//    @GetMapping
-//    public String getAllJelos(Model model) {
-//        List<Jelo> jelos = jeloService.findAll();
-//        model.addAttribute("jelos", jelos);
-//        return "narudzbina/narudzbina";
-//    }
+
 
     @GetMapping("/sto/novaNarudzbina")
-    public String showNarudzbina(@RequestParam("id") Integer id, Jelo jelo, Model model) {
+    public String showNarudzbina(@RequestParam("id") Integer id, Model model) {
         Sto sto = stoService.findById(id);
         List<Jelo> jelos = jeloService.findAll();
         model.addAttribute("jelos", jelos);
-        Narudzbina narudzbina = new Narudzbina();
-        model.addAttribute("narudzbina", narudzbina);
         model.addAttribute("sto", sto);
         return "narudzbina/narudzbina";
     }

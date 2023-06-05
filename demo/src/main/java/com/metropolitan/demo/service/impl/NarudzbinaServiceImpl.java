@@ -6,10 +6,14 @@ import com.metropolitan.demo.entity.Narudzbina;
 import com.metropolitan.demo.repository.JeloRepository;
 import com.metropolitan.demo.repository.NarudzbinaRepository;
 import com.metropolitan.demo.service.JeloService;
+import com.metropolitan.demo.service.KorisnikService;
 import com.metropolitan.demo.service.NarudzbinaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -19,6 +23,7 @@ import java.util.Optional;
 public class NarudzbinaServiceImpl implements NarudzbinaService {
 	private final NarudzbinaRepository narudzbinaRepository;
 	private final JeloService jeloService;
+	private final KorisnikService korisnikService;
 
 	@Override
 	public List<Narudzbina> findAll() {
@@ -46,14 +51,18 @@ public class NarudzbinaServiceImpl implements NarudzbinaService {
 		narudzbinaRepository.deleteById(narudzbinaId);
 	}
 
-//	@Override
-//	public void addToNarudzbina(Integer narudzbinaId, Integer jeloId) {
-//		Narudzbina narudzbina = findById(narudzbinaId);
-//		Jelo jelo = jeloService.findById(jeloId);
-//		narudzbina.setUkupnaCena(narudzbina.getUkupnaCena() + jelo.getCena());
-//		narudzbina.getJelos().add(jelo);
-//		narudzbinaRepository.save(narudzbina);
-//	}
+	@Override
+	public void addToNarudzbina(Narudzbina narudzbina, Integer jeloId) {
+		Jelo jelo = jeloService.findById(jeloId);
+		List<Jelo> jela = new ArrayList<>();
+		jela.add(jelo);
+		narudzbina.setJelos(jela);
+		narudzbina.setDatum(LocalDate.from(LocalDateTime.now()));
+		narudzbina.setKorisnikId(korisnikService.getLoggedInUser());
+		narudzbina.setUkupnaCena(ukupnaCenaNarudzbine(jela));
+
+		save(narudzbina);
+	}
 
 	@Override
 	public void deleteFromNarudzbina(Integer narudzbinaId, Integer jeloId) {
