@@ -3,20 +3,17 @@ package com.metropolitan.demo.service.impl;
 
 import com.metropolitan.demo.entity.Jelo;
 import com.metropolitan.demo.entity.Narudzbina;
-import com.metropolitan.demo.repository.JeloRepository;
 import com.metropolitan.demo.repository.NarudzbinaRepository;
 import com.metropolitan.demo.service.JeloService;
 import com.metropolitan.demo.service.KorisnikService;
 import com.metropolitan.demo.service.NarudzbinaService;
+import com.metropolitan.demo.service.StoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +21,7 @@ public class NarudzbinaServiceImpl implements NarudzbinaService {
 	private final NarudzbinaRepository narudzbinaRepository;
 	private final JeloService jeloService;
 	private final KorisnikService korisnikService;
+	private final StoService stoService;
 
 	@Override
 	public List<Narudzbina> findAll() {
@@ -52,16 +50,17 @@ public class NarudzbinaServiceImpl implements NarudzbinaService {
 	}
 
 	@Override
-	public void addToNarudzbina(Narudzbina narudzbina, Integer jeloId) {
+	public Narudzbina addToNarudzbina(Integer stoId, Integer jeloId) {
+		Narudzbina narudzbina = stoService.findById(stoId).getNarudzbina();
 		Jelo jelo = jeloService.findById(jeloId);
-		List<Jelo> jela = new ArrayList<>();
+
+		List<Jelo> jela = narudzbina.getJelos();
 		jela.add(jelo);
+
 		narudzbina.setJelos(jela);
-		narudzbina.setDatum(LocalDate.from(LocalDateTime.now()));
-		narudzbina.setKorisnikId(korisnikService.getLoggedInUser());
 		narudzbina.setUkupnaCena(ukupnaCenaNarudzbine(jela));
 
-		save(narudzbina);
+		return update(narudzbina);
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class NarudzbinaServiceImpl implements NarudzbinaService {
 		Jelo jelo = jeloService.findById(jeloId);
 		narudzbina.setUkupnaCena(narudzbina.getUkupnaCena() - jelo.getCena());
 		narudzbina.getJelos().remove(jelo);
-		save(narudzbina);
+		update(narudzbina);
 	}
 
 	@Override

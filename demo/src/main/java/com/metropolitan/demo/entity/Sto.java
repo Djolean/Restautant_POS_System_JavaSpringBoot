@@ -15,6 +15,9 @@ public class Sto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sto_id")
     private Integer id;
+    @JoinColumn(name = "narudzbina_id", referencedColumnName = "narudzbina_id")
+    @OneToOne
+    private Narudzbina narudzbina;
     @Column(name = "zauzeto")
     private boolean zauzeto;
 

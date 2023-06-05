@@ -23,18 +23,13 @@ public class Narudzbina implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "narudzbina_id")
 	private Integer id;
-	@ManyToOne (cascade = CascadeType.REMOVE)
+	@ManyToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name = "korisnik_id", referencedColumnName = "korisnik_id")
 	private Korisnik korisnikId;
-
-	@ManyToMany(cascade = CascadeType.REMOVE)
-
-
-	//@JoinColumn(name = "jelo_id", referencedColumnName = "jelo_id")
-	private List<Jelo> jelos;
 	@Column(name = "datum")
 	private LocalDate datum;
 	@Column(name = "ukupna_cena")
 	private Double ukupnaCena;
-
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Jelo> jelos;
 }

@@ -7,7 +7,37 @@
 <body>
 <div class="row">
     <div class="col-md-6">
-
+        <!-- Left side: Narudzbina table -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Cena</th>
+                <th>Ukupna cena</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Add your table rows here with data from the model -->
+            <tr th:each="jelo : ${listaJela}">
+                <td th:text="${jelo.naziv}"></td>
+                <td th:text="${jelo.cena}"></td>
+                <td th:text="${null}"></td>
+                <td>
+                    <form th:action="@{/narudzbinas/delete}" method="post">
+                        <input hidden="hidden" id="narudzbinaBrisanjeId" name="narudzbinaBrisanjeId" th:value="${narudzbina.id}">
+                        <input hidden="hidden" id="jeloBrisanjeId" name="jeloBrisanjeId" th:value="${jelo.id}">
+                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/placanjes/naplati}" method="post">
+            <button class="btn btn-success" type="submit">Naplati</button>
+        </form>
+    </div>
+    <div class="col-md-6">
         <!-- Right side: Meni table -->
         <table class="table table-striped">
             <thead>
@@ -24,9 +54,9 @@
                 <td th:text="${jelo.cena}"></td>
                 <td th:text="${jelo.opis}"></td>
                 <td>
-                        <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="post" th:object="${narudzbina}">
-<!--                        <input type="hidden" name="id" th:value="${sto.id}">-->
-                        <input type="hidden" name="jeloId" th:value="${jelo.id}">
+                    <form th:action="@{/narudzbinas/sto/novaNarudzbina}" method="post">
+                        <input hidden="hidden" type="number" id="stoId" name="stoId"  th:value="${stoId}">
+                        <input hidden="hidden" type="number" id="jeloId" name="jeloId" th:value="${jelo.id}">
                         <button class="btn btn-primary btn-sm" type="submit">Dodaj</button>
                     </form>
                 </td>
