@@ -23,12 +23,12 @@ public class JeloController {
 		return "jelo/jela";
 	}
 
-//	@GetMapping("/{jeloId}")
-//	public String getJeloById(@PathVariable Integer jeloId, Model model) {
-//		Jelo jelo = jeloService.findById(jeloId);
-//		model.addAttribute("jelo", jelo);
-//		return "jela";
-//	}
+	@GetMapping("/{jeloId}")
+	public String getJeloById(@PathVariable Integer jeloId, Model model) {
+		Jelo jelo = jeloService.findById(jeloId);
+		model.addAttribute("jelo", jelo);
+		return "jela";
+	}
 
 	@GetMapping("/create")
 	public String showCreateForm(Model model) {

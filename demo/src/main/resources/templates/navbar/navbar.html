@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Navbar</title>
 </head>
 <body th:fragment="navbar">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,9 +21,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/stos}">Klijenti</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Narudžbina</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:if="${isAdmin}" th:href="@{/korisniks}">Korisnici</a>

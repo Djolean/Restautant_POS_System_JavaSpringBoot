@@ -63,7 +63,7 @@
             <tr th:each="jelo : ${jelos}">
                 <td th:text="${jelo.naziv}"></td>
                 <td th:text="${jelo.cena}"></td>
-                <td th:text="${jelo.opis}"></td>
+                <td th:text="${jelo.opis}" style="max-width: 500px"></td>
                 <td>
                     <a th:href="@{/jelos/edit/{jeloId}(jeloId=${jelo.id})}" class="btn btn-primary btn-sm">Izmeni</a>
                     <a th:href="@{/jelos/delete/{jeloId}(jeloId=${jelo.id})}" class="btn btn-danger btn-sm">Obriši</a>

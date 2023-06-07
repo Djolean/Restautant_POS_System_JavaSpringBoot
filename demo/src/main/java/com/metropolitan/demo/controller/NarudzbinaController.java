@@ -27,6 +27,7 @@ public class NarudzbinaController {
     private final KorisnikService korisnikService;
     private final StoService stoService;
 
+
     @GetMapping
     public String getAllNarudzbinas(Model model) {
         List<Narudzbina> narudzbinas = narudzbinaService.findAll();
@@ -105,6 +106,7 @@ public class NarudzbinaController {
 
         model.addAttribute("jelos", jeloService.findAll());
         model.addAttribute("stoId", sto.getId());
+
 
         return "narudzbina/narudzbina";
     }

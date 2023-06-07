@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class GlobalControllerAdvice {
     private final KorisnikService korisnikService;
 
-    // ATTRIBUTE
     @ModelAttribute("isAdmin")
     public boolean isAdmin() {
         return korisnikService.isUserAdmin();
