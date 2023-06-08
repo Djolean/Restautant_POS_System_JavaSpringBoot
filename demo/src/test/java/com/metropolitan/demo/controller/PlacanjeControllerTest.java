@@ -19,15 +19,12 @@ class PlacanjeControllerTest {
 
     @Test
     void naplatiTest() {
-        // Arrange
         MockitoAnnotations.openMocks(this); // Initialize mocks
 
-        Integer narudzbinaId = 123;
+        Integer narudzbinaId = 1;
 
-        // Act
         String result = placanjeController.naplati(narudzbinaId);
 
-        // Assert
         verify(placanjeService).naplati(narudzbinaId);
         assertEquals("redirect:/stos", result);
     }
