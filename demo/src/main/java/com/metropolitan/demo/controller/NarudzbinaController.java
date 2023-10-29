@@ -92,7 +92,7 @@ public class NarudzbinaController {
         Optional<Narudzbina> narudzbina = Optional.ofNullable(stoService.findById(sto.getId()).getNarudzbina());
         if (narudzbina.isEmpty()) {
             Narudzbina novaNarudzbina = new Narudzbina();
-            novaNarudzbina.setKorisnikId(korisnikService.getLoggedInUser());
+                novaNarudzbina.setKorisnikId(korisnikService.getLoggedInUser());
             novaNarudzbina.setDatum(LocalDate.now());
             sto.setNarudzbina(novaNarudzbina);
             narudzbinaService.save(novaNarudzbina);
